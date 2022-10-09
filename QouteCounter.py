@@ -2,8 +2,6 @@ import discord, colorama, os, logging
 from dotenv import load_dotenv
 import pandas as pd
 
-
-
 class QuoteCounter(discord.Client):
     """ A bot that counts the number of times a user has qouted another person. """
     async def on_ready(self):
@@ -17,11 +15,9 @@ class QuoteCounter(discord.Client):
 
         channel_id = os.environ.get("CHANNEL_ID") 
         csv_name = os.environ.get("OUTPUT_CSV") 
-
         # Check if message contains a @mention if in qoutes channel 
         if message.content = "!count_qoutes":
             if message.channel.id == channel_id and "@" in message.content.lower():
-
                 data = pd.DataFrame(columns=['content', 'time', 'author'])
                 
                 async for msg in message.channel.history(): 
@@ -30,11 +26,9 @@ class QuoteCounter(discord.Client):
                             'author': msg.author.name
                             'time': msg.created_at,
                             'content': msg.content,
-                        }, ignore_index=True)
-                        
+                        }, ignore_index=True)                  
 
-                data.to_csv(csv_name)
-        
+                data.to_csv(csv_name)      
 
 def print_result(output, color=colorama.Fore.GREEN): 
     """ Base method. Pretty print out results to terminal. """
